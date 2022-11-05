@@ -23,7 +23,6 @@ const Nav = () => {
         <ul className="nav-links">
           {links.map((link) => {
             const { id, text, url } = link
-
             return (
               <li key={id}>
                 <Link to={url}>{text}</Link>
@@ -31,6 +30,7 @@ const Nav = () => {
             )
           })}
         </ul>
+        <CartButtons />
       </div>
     </NavContainer>
   )
