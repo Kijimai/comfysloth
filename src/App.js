@@ -10,6 +10,7 @@ import {
   SingleProduct,
   Checkout,
   Error,
+  PrivateRoute,
 } from "./pages/index"
 
 function App() {

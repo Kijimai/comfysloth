@@ -47,6 +47,7 @@ const NavContainer = styled.nav`
     margin: 0 auto;
     max-width: var(--max-width);
   }
+  
   .nav-header {
     display: flex;
     align-items: center;
@@ -56,11 +57,13 @@ const NavContainer = styled.nav`
       margin-left: -15px;
     }
   }
+
   .nav-toggle {
     background: transparent;
     border: transparent;
     color: var(--clr-primary-5);
     cursor: pointer;
+
     svg {
       font-size: 2rem;
     }
