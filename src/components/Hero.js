@@ -1,11 +1,33 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import heroBcg from '../assets/hero-bcg.jpeg'
-import heroBcg2 from '../assets/hero-bcg-2.jpeg'
+import React from "react"
+import styled from "styled-components"
+import { Link } from "react-router-dom"
+import heroBcg from "../assets/hero-bcg.jpeg"
+import heroBcg2 from "../assets/hero-bcg-2.jpeg"
 
 const Hero = () => {
-  return <h4>hero</h4>
+  return (
+    <Wrapper className="section-center">
+      <article className="content">
+        <h1>
+          Design your <br />
+          comfort zone
+        </h1>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam
+          cupiditate saepe officia veniam, praesentium velit. Debitis architecto
+          expedita libero quas quis provident enim quo, ullam necessitatibus
+          delectus ratione eveniet fuga?
+        </p>
+        <Link to="/products" className="btn hero-btn">
+          shop products
+        </Link>
+      </article>
+      <article className="img-container">
+        <img src={heroBcg} alt="nice table" className="main-img"/>
+        <img src={heroBcg2} alt="person working" className="accent-img"/>
+      </article>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`
@@ -58,7 +80,7 @@ const Wrapper = styled.section`
       border-radius: var(--radius);
     }
     .img-container::before {
-      content: '';
+      content: "";
       position: absolute;
       width: 10%;
       height: 80%;

@@ -24,12 +24,16 @@ const Sidebar = () => {
           {links.map(({ id, text, url }) => {
             return (
               <li key={id}>
-                <Link to={url}>{text}</Link>
+                <Link to={url} onClick={closeSidebar}>
+                  {text}
+                </Link>
               </li>
             )
           })}
           <li>
-            <Link to="/checkout">checkout</Link>
+            <Link onClick={closeSidebar} to="/checkout">
+              checkout
+            </Link>
           </li>
         </ul>
         <CartButtons />
