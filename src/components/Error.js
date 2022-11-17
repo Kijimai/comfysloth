@@ -1,10 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react"
+import styled from "styled-components"
 
 const Error = () => {
-  return <h4>error element</h4>
+  return (
+    <div className="section section-center text-center">
+      <h2>There was an error...</h2>
+    </div>
+  )
 }
-
-
 
 export default Error

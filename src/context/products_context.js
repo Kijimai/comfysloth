@@ -1,7 +1,7 @@
 import axios from "axios"
 import React, { useContext, useEffect, useReducer } from "react"
 import reducer from "../reducers/products_reducer"
-import { products_url, products_url as url } from "../utils/constants"
+import { products_url as url } from "../utils/constants"
 import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
@@ -34,19 +34,19 @@ export const ProductsProvider = ({ children }) => {
     dispatch({ type: SIDEBAR_CLOSE })
   }
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (url) => {
     dispatch({ type: GET_PRODUCTS_BEGIN })
     try {
-      const { data } = await axios.get(products_url)
+      const { data } = await axios.get(url)
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: { products: data } })
     } catch (err) {
       console.log(err.response)
-      dispatch({type: GET_PRODUCTS_ERROR})
+      dispatch({ type: GET_PRODUCTS_ERROR })
     }
   }
 
   useEffect(() => {
-    fetchProducts()
+    fetchProducts(`${url}`)
   }, [])
 
   return (
