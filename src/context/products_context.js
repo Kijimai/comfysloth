@@ -48,10 +48,10 @@ export const ProductsProvider = ({ children }) => {
     }
   }
 
-  const fetchSingleProduct = async (id) => {
+  const fetchSingleProduct = async (url) => {
     dispatch({ type: GET_SINGLE_PRODUCT_BEGIN })
     try {
-      const { data } = await axios.get(`${url}/${id}`)
+      const { data } = await axios.get(url)
       dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: data })
     } catch (err) {
       console.log(err.response)
