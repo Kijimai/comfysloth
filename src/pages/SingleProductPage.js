@@ -29,9 +29,9 @@ const SingleProductPage = ({ children }) => {
   }, [id])
 
   useEffect(() => {
-    if(error) {
+    if (error) {
       setTimeout(() => {
-        history.push('/')
+        history.push("/")
       }, 3000)
     }
   })
@@ -44,6 +44,12 @@ const SingleProductPage = ({ children }) => {
     featured,
     colors,
     category,
+    images,
+    reviews,
+    stars,
+    name,
+    description,
+    company,
   } = product
 
   if (loading) {
@@ -56,8 +62,35 @@ const SingleProductPage = ({ children }) => {
 
   return (
     <Wrapper>
-      single product page
-      <p>{id}</p>
+      <PageHero title={name} product />
+      <div className="section section-center">
+        <Link to="/products" className="btn">
+          Back to Products
+        </Link>
+        <div className="products-center">
+          <ProductImages images />
+          <section className="content">
+            <h2>{name}</h2>
+            <Stars />
+            <h5 className="price">{formatPrice(price)}</h5>
+            <p className="desc">{description}</p>
+            <p className="info">
+              <span>Available: </span>
+              {stock > 0 ? "In stock" : "Out of Stock"}
+            </p>
+            <p className="info">
+              <span>SKU: </span>
+              {productId}
+            </p>
+            <p className="info">
+              <span>Company: </span>
+              {company}
+            </p>
+            <hr />
+            {stock > 0 && <AddToCart />}
+          </section>
+        </div>
+      </div>
     </Wrapper>
   )
 }
