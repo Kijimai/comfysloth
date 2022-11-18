@@ -1,8 +1,28 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
+import React, { useState } from "react"
+import styled from "styled-components"
 
-const ProductImages = () => {
-  return <h4>product images</h4>
+const ProductImages = ({ images = [{ url: "" }] }) => {
+  const [currentImage, setCurrentImage] = useState(images[0])
+
+  return (
+    <Wrapper>
+      <img src={currentImage.url} alt="main preview" className="main" />
+      <div className="gallery">
+        {images.map((image, idx) => {
+          const { url, id, filename } = image
+          return (
+            <img
+              className={`${currentImage.url === url ? "active" : null}`}
+              key={id}
+              src={url}
+              alt={filename}
+              onClick={() => setCurrentImage(images[idx])}
+            />
+          )
+        })}
+      </div>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`

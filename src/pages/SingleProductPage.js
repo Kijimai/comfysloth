@@ -67,8 +67,8 @@ const SingleProductPage = ({ children }) => {
         <Link to="/products" className="btn">
           Back to Products
         </Link>
-        <div className="products-center">
-          <ProductImages images />
+        <div className="product-center">
+          <ProductImages images={images} />
           <section className="content">
             <h2>{name}</h2>
             <Stars />
