@@ -5,15 +5,19 @@ import styled from "styled-components"
 import GridView from "./GridView"
 import ListView from "./ListView"
 const Sort = () => {
-  const { filteredProducts: products, gridView: isGridView } =
-    useFilterContext()
+  const {
+    filteredProducts: products,
+    gridView: isGridView,
+    setGridView,
+    setListView,
+  } = useFilterContext()
   return (
     <Wrapper>
       <div className="btn-container">
-        <button className={`${isGridView && "active"}`}>
+        <button onClick={setGridView} className={`${isGridView && "active"}`}>
           <BsFillGridFill />
         </button>
-        <button className={`${!isGridView && "active"}`}>
+        <button onClick={setListView} className={`${!isGridView && "active"}`}>
           <BsList />
         </button>
       </div>

@@ -12,7 +12,15 @@ import {
 const filter_reducer = (state, action) => {
   switch (action.type) {
     case LOAD_PRODUCTS:
-      return { ...state, allProducts: [...action.payload], filteredProducts: [...action.payload] }
+      return {
+        ...state,
+        allProducts: [...action.payload],
+        filteredProducts: [...action.payload],
+      }
+    case SET_GRIDVIEW:
+      return { ...state, gridView: true }
+    case SET_LISTVIEW:
+      return { ...state, gridView: false }
     default:
       return { ...state }
   }
