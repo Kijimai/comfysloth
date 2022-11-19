@@ -1,9 +1,35 @@
-import React from 'react'
-import { useFilterContext } from '../context/filter_context'
-import { BsFillGridFill, BsList } from 'react-icons/bs'
-import styled from 'styled-components'
+import React from "react"
+import { useFilterContext } from "../context/filter_context"
+import { BsFillGridFill, BsList } from "react-icons/bs"
+import styled from "styled-components"
+import GridView from "./GridView"
+import ListView from "./ListView"
 const Sort = () => {
-  return <h4>sort </h4>
+  const { filteredProducts: products, gridView: isGridView } =
+    useFilterContext()
+  return (
+    <Wrapper>
+      <div className="btn-container">
+        <button className={`${isGridView && "active"}`}>
+          <BsFillGridFill />
+        </button>
+        <button className={`${!isGridView && "active"}`}>
+          <BsList />
+        </button>
+      </div>
+      <p>{products.length} products found</p>
+      <hr />
+      <form>
+        <label htmlFor="sort">sort by</label>
+        <select name="sort" id="sort" className="sort-input">
+          <option value="price-lowest">price (lowest)</option>
+          <option value="price-highest">price (highest)</option>
+          <option value="name-a">name (Descending)</option>
+          <option value="name-z">name (Ascending)</option>
+        </select>
+      </form>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`
