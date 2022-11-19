@@ -4,11 +4,22 @@ import GridView from "./GridView"
 import ListView from "./ListView"
 
 const ProductList = () => {
-  const { filteredProducts: products } = useFilterContext()
+  const { filteredProducts: products, gridView: isGridView } =
+    useFilterContext()
 
-  return <GridView products={products}>
+  if (products.length < 1) {
+    return (
+      <h5 style={{ textTransform: "none" }}>
+        Sorry, no products matched your search...
+      </h5>
+    )
+  }
 
-  </GridView>
+  if (!isGridView) {
+    return <ListView products={products} />
+  }
+
+  return <GridView products={products}></GridView>
 }
 
 export default ProductList
