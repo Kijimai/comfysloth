@@ -12,10 +12,18 @@ import {
 const filter_reducer = (state, action) => {
   switch (action.type) {
     case LOAD_PRODUCTS:
+      // Spread operator after using map to create new array from payload, then find max price of array
+      let maxPrice = Math.max(
+        ...action.payload.map((product) => {
+          return product.price
+        })
+      )
+      console.log(maxPrice)
       return {
         ...state,
         allProducts: [...action.payload],
         filteredProducts: [...action.payload],
+        filters: { ...state.filters, maxPrice: maxPrice, price: maxPrice },
       }
     case SET_GRIDVIEW:
       return { ...state, gridView: true }
