@@ -21,6 +21,8 @@ const filter_reducer = (state, action) => {
       return { ...state, gridView: true }
     case SET_LISTVIEW:
       return { ...state, gridView: false }
+    case UPDATE_SORT:
+      return { ...state, sort: action.payload }
     default:
       return { ...state }
   }
