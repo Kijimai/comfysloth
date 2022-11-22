@@ -35,9 +35,11 @@ export const FilterProvider = ({ children }) => {
   const { products } = useProductsContext()
   const [state, dispatch] = useReducer(reducer, initialState)
 
+
   useEffect(() => {
+    dispatch({type: FILTER_PRODUCTS})
     dispatch({ type: SORT_PRODUCTS })
-  }, [products, state.sort])
+  }, [products, state.sort, state.filters])
   // products, state.filteredProducts
   useEffect(() => {
     dispatch({ type: LOAD_PRODUCTS, payload: products })
@@ -53,13 +55,28 @@ export const FilterProvider = ({ children }) => {
 
   const updateSort = (e) => {
     const { name, value } = e.target
-    console.log(name, value)
     dispatch({ type: UPDATE_SORT, payload: value })
+  }
+
+  const updateFilters = (e) => {
+    const { name, value } = e.target
+    dispatch({ type: UPDATE_FILTERS, payload: { value, name } })
+  }
+
+  const clearFilters = () => {
+    dispatch()
   }
 
   return (
     <FilterContext.Provider
-      value={{ ...state, setListView, setGridView, updateSort }}
+      value={{
+        ...state,
+        setListView,
+        setGridView,
+        updateSort,
+        updateFilters,
+        clearFilters,
+      }}
     >
       {children}
     </FilterContext.Provider>

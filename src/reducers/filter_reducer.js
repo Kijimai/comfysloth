@@ -59,7 +59,20 @@ const filter_reducer = (state, action) => {
         default:
           return { ...state }
       }
-
+    case CLEAR_FILTERS:
+      return { ...state }
+    case UPDATE_FILTERS:
+      const { name, value } = action.payload
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [name]: value,
+        },
+      }
+    case FILTER_PRODUCTS:
+      console.log("filtering producs")
+      return { ...state }
     default:
       return { ...state }
   }
