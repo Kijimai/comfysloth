@@ -33,8 +33,8 @@ const filter_reducer = (state, action) => {
       return { ...state, sort: action.payload }
 
     case SORT_PRODUCTS:
-      const { sort, filteredProducts: filtered_products } = state
-      let tempProducts = [...filtered_products]
+      const { sort, filteredProducts } = state
+      let tempProducts = [...filteredProducts]
       switch (sort) {
         case "price-lowest":
           tempProducts = tempProducts.sort((curr, next) => {
@@ -83,8 +83,22 @@ const filter_reducer = (state, action) => {
       }
     case FILTER_PRODUCTS:
       console.log("filtering producs")
+      const { allProducts } = state
+      const { text, category, color, company, price, shipping } = state.filters
+      
+      let tempFilterProducts = [...allProducts]
+      if(text) {
+        tempFilterProducts = tempFilterProducts.filter((product) => {
+          return product.name.toLowerCase().startsWith(text)
+        })
+      }
 
-      return { ...state }
+      if (category) {
+        
+      }
+
+      // filtering products
+      return { ...state, filteredProducts: tempFilterProducts }
     default:
       return { ...state }
   }
