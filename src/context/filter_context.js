@@ -35,9 +35,8 @@ export const FilterProvider = ({ children }) => {
   const { products } = useProductsContext()
   const [state, dispatch] = useReducer(reducer, initialState)
 
-
   useEffect(() => {
-    dispatch({type: FILTER_PRODUCTS})
+    dispatch({ type: FILTER_PRODUCTS })
     dispatch({ type: SORT_PRODUCTS })
   }, [products, state.sort, state.filters])
   // products, state.filteredProducts
@@ -59,7 +58,11 @@ export const FilterProvider = ({ children }) => {
   }
 
   const updateFilters = (e) => {
-    const { name, value } = e.target
+    let { name, value } = e.target
+    // If the target name is "category" it is a button and we grab the button's text content instead
+    if (name === "category") {
+      value = e.target.textContent
+    }
     dispatch({ type: UPDATE_FILTERS, payload: { value, name } })
   }
 

@@ -13,9 +13,9 @@ export const formatPrice = (price) => {
 /** 
  * Takes an array and a string value from an object's key
  * and returns a Set of unique values from the array.
- *  @param {array} items
- *  @param {string} type
- *  @returns {array} Array
+ *  @param {array} items The array
+ *  @param {string} type The object key as a string
+ *  @returns {array} The new array of unique values
 */
 export const getUniqueValues = (items, type) => {
   let uniqueValues = items.map((item) => item[type])
