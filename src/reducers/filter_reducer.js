@@ -72,6 +72,7 @@ const filter_reducer = (state, action) => {
       }
     case FILTER_PRODUCTS:
       console.log("filtering producs")
+
       return { ...state }
     default:
       return { ...state }
