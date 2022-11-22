@@ -10,4 +10,17 @@ export const formatPrice = (price) => {
   }).format(price / 100)
 }
 
-export const getUniqueValues = () => {}
+/** 
+ * Takes an array and a string value from an object's key
+ * and returns a Set of unique values from the array.
+ *  @param {array} items
+ *  @param {string} type
+ *  @returns {array} Array
+*/
+export const getUniqueValues = (items, type) => {
+  let uniqueValues = items.map((item) => item[type])
+  if(type === "colors") {
+    uniqueValues = uniqueValues.flat()
+  }
+  return ["all", ...new Set(uniqueValues)]
+}
