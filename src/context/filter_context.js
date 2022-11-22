@@ -58,7 +58,7 @@ export const FilterProvider = ({ children }) => {
   }
 
   const updateFilters = (e) => {
-    let { name, value } = e.target
+    let { name, value, checked } = e.target
     // If the target name is "category" it is a button and we grab the button's text content instead
     if (name === "category") {
       value = e.target.textContent
@@ -72,11 +72,17 @@ export const FilterProvider = ({ children }) => {
       value = Number(value)
     }
 
+    if (name === "shipping") {
+      value = checked
+    }
+
     dispatch({ type: UPDATE_FILTERS, payload: { value, name } })
   }
 
   const clearFilters = () => {
-    dispatch()
+    dispatch({
+      type: CLEAR_FILTERS,
+    })
   }
 
   return (
