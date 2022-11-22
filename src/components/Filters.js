@@ -117,6 +117,20 @@ const Filters = () => {
             </div>
           </div>
           {/* End of Colors */}
+          {/* Price sort */}
+          <div className="form-control">
+            <h5>Price</h5>
+            <p className="price">{formatPrice(price)}</p>
+            <input
+              type="range"
+              name="price"
+              onChange={updateFilters}
+              min={minPrice}
+              max={maxPrice}
+              value={price}
+            />
+          </div>
+          {/* End of price sort */}
           <button type="submit">Search</button>
         </form>
       </div>
