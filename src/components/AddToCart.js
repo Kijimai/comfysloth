@@ -6,10 +6,10 @@ import { useCartContext } from "../context/cart_context"
 import AmountButtons from "./AmountButtons"
 
 const AddToCart = ({ product }) => {
+  const { addToCart } = useCartContext()
   const { id, stock, colors } = product
   const [amount, setAmount] = useState(1)
   const [currentColor, setCurrentColor] = useState([colors[0]])
-  const { addToCart } = useCartContext()
 
   const decrease = () => {
     setAmount((prev) => {
