@@ -17,7 +17,7 @@ const getLocalStorage = () => {
   }
 }
 
-// Initialize either with an empty array or 
+// Initialize either with an empty array or
 const initialState = {
   cart: getLocalStorage(),
   totalItems: 0,
