@@ -40,6 +40,7 @@ export const CartProvider = ({ children }) => {
 
   const removeCartItem = (id) => {
     console.log("current id", id)
+    dispatch({ type: REMOVE_CART_ITEM, payload: id })
   }
 
   const toggleAmount = (id, value) => {}

@@ -16,17 +16,17 @@ const cart_reducer = (state, action) => {
       console.log(action.payload)
       if (tempItem) {
         const tempCart = state.cart.map((cartItem) => {
-          if(cartItem.id === id + color) {
-            let newAmount = cartItem.amount + amount  
-            if(newAmount > cartItem.max) {
+          if (cartItem.id === id + color) {
+            let newAmount = cartItem.amount + amount
+            if (newAmount > cartItem.max) {
               newAmount = cartItem.max
             }
-            return {...cartItem, amount: newAmount}
+            return { ...cartItem, amount: newAmount }
           } else {
             return cartItem
           }
         })
-        return {...state, cart: tempCart}
+        return { ...state, cart: tempCart }
       } else {
         // Create a newItem object that differentiates from other items with the same id but different color
         const newItem = {
@@ -40,7 +40,13 @@ const cart_reducer = (state, action) => {
         }
         return { ...state, cart: [...state.cart, newItem] }
       }
-      return { ...state }
+    case REMOVE_CART_ITEM:
+      const tempCart = state.cart.filter((item) => {
+        return item.id !== action.payload
+      })
+      return { ...state, cart: tempCart }
+    case CLEAR_CART:
+      return { ...state, cart: [] }
     default:
       return { ...state }
   }
