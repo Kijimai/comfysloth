@@ -1,3 +1,4 @@
+import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers"
 import {
   ADD_TO_CART,
   CLEAR_CART,
@@ -73,10 +74,17 @@ const cart_reducer = (state, action) => {
     return { ...state, cart: [] }
   }
   if (action.type === COUNT_CART_TOTALS) {
-    const totalItems = state.cart.reduce((acc, curr) => {
-      return acc + curr.amount
-    }, 0)
-    return { ...state, totalAmount: totalItems }
+    const { totalAmount, totalItems } = state.cart.reduce(
+      (total, currentItem) => {
+        const { price, amount } = currentItem
+        total.totalAmount += price * amount
+        total.totalItems += amount
+
+        return total
+      },
+      { totalItems: 0, totalAmount: 0 }
+    )
+    return { ...state, totalAmount, totalItems }
   }
 
   throw new Error(`No Matching "${action.type}" - action type`)
