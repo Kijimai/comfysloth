@@ -32,6 +32,7 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("comfy-sloth-cart", JSON.stringify(state.cart))
+    countTotals()
   }, [state.cart])
 
   const addToCart = (id, color, amount, product) => {
@@ -51,9 +52,19 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: CLEAR_CART })
   }
 
+  const countTotals = () => {
+    dispatch({ type: COUNT_CART_TOTALS })
+  }
+
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, removeCartItem, toggleAmount, clearCart }}
+      value={{
+        ...state,
+        addToCart,
+        removeCartItem,
+        toggleAmount,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>
