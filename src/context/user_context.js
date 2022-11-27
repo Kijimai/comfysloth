@@ -23,7 +23,7 @@ export const UserProvider = ({ children }) => {
         user,
         logout,
         loginWithRedirect,
-        myUser
+        myUser,
       }}
     >
       {children}
