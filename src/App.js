@@ -1,10 +1,14 @@
+// Package dependencies
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { Navbar, Sidebar, Footer } from "./components"
 import styled from "styled-components"
+
 // React-Toastify dependencies
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+
+// Imported Pages Components
 import {
   Home,
   About,
@@ -14,6 +18,7 @@ import {
   Checkout,
   Error,
   PrivateRoute,
+  AuthWrapper,
 } from "./pages/index"
 
 function App() {
@@ -28,27 +33,29 @@ function App() {
       />
       <Navbar />
       <Sidebar />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/about">
-          <About />
-        </Route>
-        <Route exact path="/cart">
-          <Cart />
-        </Route>
-        <Route exact path="/products">
-          <Products />
-        </Route>
-        <Route exact path="/products/:id" children={<SingleProduct />} />
-        <PrivateRoute exact path="/checkout">
-          <Checkout />
-        </PrivateRoute>
-        <Route path="*">
-          <Error />
-        </Route>
-      </Switch>
+      <AuthWrapper>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/cart">
+            <Cart />
+          </Route>
+          <Route exact path="/products">
+            <Products />
+          </Route>
+          <Route exact path="/products/:id" children={<SingleProduct />} />
+          <PrivateRoute exact path="/checkout">
+            <Checkout />
+          </PrivateRoute>
+          <Route path="*">
+            <Error />
+          </Route>
+        </Switch>
+      </AuthWrapper>
       <Footer />
     </Router>
   )
