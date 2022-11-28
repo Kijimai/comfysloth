@@ -2,6 +2,9 @@ import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { Navbar, Sidebar, Footer } from "./components"
 import styled from "styled-components"
+// React-Toastify dependencies
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 import {
   Home,
   About,
@@ -16,6 +19,13 @@ import {
 function App() {
   return (
     <Router>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        closeOnClick
+        draggable={false}
+      />
       <Navbar />
       <Sidebar />
       <Switch>
