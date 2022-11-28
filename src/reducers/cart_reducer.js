@@ -1,4 +1,3 @@
-import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers"
 import {
   ADD_TO_CART,
   CLEAR_CART,
