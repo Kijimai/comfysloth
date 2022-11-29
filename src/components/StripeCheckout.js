@@ -14,7 +14,27 @@ import { formatPrice } from "../utils/helpers"
 import { useHistory } from "react-router-dom"
 
 const CheckoutForm = () => {
-  return <Wrapper>hello from Stripe Checkout </Wrapper>
+  const { cart, amount, shippingFee, clearCart } = useCartContext()
+  const { myUser } = useUserContext()
+  const history = useHistory()
+
+  // Stripe States
+  const [succeeded, setSucceeded] = useState(false)
+  const [error, setError] = useState(null)
+  const [processing, setProcessing] = useState("")
+  const [disabled, setDisabled] = useState(true)
+  const [clientSecret, setClientSecret] = useState("")
+
+  const stripe = useStripe()
+  const elements = useElements()
+
+  return (
+    <Wrapper>
+      <form>
+        <button>Submit</button>
+      </form>
+    </Wrapper>
+  )
 }
 
 const cardStyle = {
