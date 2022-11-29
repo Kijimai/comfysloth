@@ -9,7 +9,12 @@ const AuthWrapper = ({ children }) => {
   if (isLoading) {
     return (
       <Wrapper>
-        <h1>Loading...</h1>
+        <ReactLoading
+          type={"bubbles"}
+          color={"green"}
+          height={"20%"}
+          width={"20%"}
+        />
       </Wrapper>
     )
   }
