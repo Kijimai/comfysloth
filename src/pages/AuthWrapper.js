@@ -9,7 +9,7 @@ const AuthWrapper = ({ children }) => {
   if (isLoading) {
     return (
       <Wrapper>
-        <ReactLoading type={"bubbles"} />
+        <h1>Loading...</h1>
       </Wrapper>
     )
   }
