@@ -33,10 +33,12 @@ const CheckoutForm = () => {
   const createPaymentIntent = async () => {
     console.log("Hello from stripe checkout!")
     try {
-      const data = await axios.post(
+      const { data } = await axios.post(
         "/.netlify/functions/create-payment-intent",
         JSON.stringify({ cart, shippingFee, totalAmount })
       )
+      console.log(data)
+      setClientSecret(data.clientSecret)
     } catch (err) {
       console.log(err.response)
     }
