@@ -11,17 +11,17 @@ import axios from "axios"
 import { useCartContext } from "../context/cart_context"
 import { useUserContext } from "../context/user_context"
 import { formatPrice } from "../utils/helpers"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 
 const CheckoutForm = () => {
   const { cart, totalAmount, shippingFee, clearCart } = useCartContext()
   const { myUser } = useUserContext()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   // Stripe States
-  const [succeeded, setSucceeded] = useState(true)
+  const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
   const [processing, setProcessing] = useState("")
   const [disabled, setDisabled] = useState(true)
@@ -31,13 +31,11 @@ const CheckoutForm = () => {
   const elements = useElements()
 
   const createPaymentIntent = async () => {
-    console.log("Hello from stripe checkout!")
     try {
       const { data } = await axios.post(
         "/.netlify/functions/create-payment-intent",
         JSON.stringify({ cart, shippingFee, totalAmount })
       )
-      console.log(data)
       setClientSecret(data.clientSecret)
     } catch (err) {
       console.log(err.response)
@@ -46,6 +44,7 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     createPaymentIntent()
+    // eslint-disable-next-line
   }, [])
 
   const cardStyle = {
@@ -66,23 +65,59 @@ const CheckoutForm = () => {
     },
   }
 
-  const handleChange = async (event) => {}
+  const handleChange = async (event) => {
+    // event.empty returns a boolean value to see if the input is empty or not -- the button will be disabled if the input is empty
+    setDisabled(event.empty)
+    setError(event.error ? event.error.message : "")
+  }
 
-  const handleSubmit = async (ev) => {}
+  const handleSubmit = async (ev) => {
+    ev.preventDefault()
+    setProcessing(true)
+
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      },
+    })
+
+    if (payload.error) {
+      setError(`Payment failed: ${payload.error.message}`)
+      setProcessing(false)
+    } else {
+      setError(null)
+      setProcessing(false)
+      setSucceeded(true)
+      console.log(payload)
+      setTimeout(() => {
+        clearCart()
+        navigate("/")
+      }, 10000)
+    }
+  }
 
   return (
     <div>
+      {succeeded ? (
+        <article>
+          <h4>Thank you</h4>
+          <h4>Your payment was successful!</h4>
+          <h4>Redirecting to the home page in a moment...</h4>
+        </article>
+      ) : (
+        <article>
+          <h4>Hello, {myUser && myUser.name}</h4>
+          <p>Your total is {formatPrice(shippingFee + totalAmount)}</p>
+          <p>Test Card Number: 4242 4242 4242 4242</p>
+        </article>
+      )}
       <form id="payment-form" onSubmit={handleSubmit}>
         <CardElement
           id="card-element"
           options={cardStyle}
           onChange={handleChange}
         />
-        <button
-          type="button"
-          disabled={processing || disabled || succeeded}
-          id="submit"
-        >
+        <button disabled={processing || disabled || succeeded} id="submit">
           <span id="button-text">
             {processing ? <div id="spinner" className="spinner"></div> : "Pay"}
           </span>

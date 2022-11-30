@@ -9,6 +9,9 @@ exports.handler = async function (event, context) {
     const { cart, shippingFee, totalAmount } = JSON.parse(event.body)
 
     const calculateOrderAmount = () => {
+      // Replace this constant with a calculation of the order's amount
+      // Calculate the order total on the server to prevent
+      // people from directly manipulating the amount on the client
       return shippingFee + totalAmount
     }
 
